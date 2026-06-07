@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SalesVision BI</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-left">
+
+        <h1>📊 SalesVision BI</h1>
+
+        <p>
+            Plataforma inteligente para análise
+            e monitoramento de vendas.
+        </p>
+
+    </div>
+
+    <div class="login-right">
+
+        <h2>Entrar</h2>
+
+        <form action="/dashboard">
+
+            <input
+                type="email"
+                placeholder="Seu email"
+                required>
+
+            <input
+                type="password"
+                placeholder="Sua senha"
+                required>
+
+            <button type="submit">
+                Acessar Plataforma
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

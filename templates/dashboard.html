@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SalesVision BI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <div class="logo">
+            📊 SalesVision BI
+        </div>
+
+        <div class="menu">
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="#upload">📁 Upload CSV</a>
+            <a href="#">📈 Relatórios</a>
+            <a href="#">🕒 Histórico</a>
+            <a href="#">⚙ Configurações</a>
+        </div>
+
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="main">
+
+        <div class="topbar">
+            <h1>Dashboard de Vendas</h1>
+            <p>Monitoramento inteligente de dados comerciais</p>
+        </div>
+
+        <!-- CARDS -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>💰 Receita Total</h3>
+                <p>R$ {{ total_vendas }}</p>
+            </div>
+
+            <div class="card">
+                <h3>🏆 Produto Líder</h3>
+                <p>{{ produto_lider }}</p>
+            </div>
+
+            <div class="card">
+                <h3>📉 Menor Desempenho</h3>
+                <p>{{ produto_menor }}</p>
+            </div>
+
+            <div class="card">
+    <h3>⚠️ Outliers</h3>
+    <p>0</p>
+</div>
+
+        </div>
+
+        <!-- UPLOAD -->
+        <div class="upload-area" id="upload">
+
+            <h2>📁 Enviar Arquivo CSV</h2>
+
+            <form action="/upload"
+                  method="POST"
+                  enctype="multipart/form-data">
+
+                <input
+                    type="file"
+                    name="arquivo"
+                    accept=".csv"
+                    required>
+
+                <button type="submit">
+                    🚀 Processar Dados
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="chart">
+
+    <canvas id="grafico"></canvas>
+
+</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
