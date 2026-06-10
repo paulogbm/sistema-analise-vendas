@@ -1,50 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>SalesVision BI</title>
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SalesVision BI - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
 <div class="login-container">
-
     <div class="login-left">
-
-        <h1>📊 SalesVision BI</h1>
-
-        <p>
-            Plataforma inteligente para análise
-            e monitoramento de vendas.
-        </p>
-
+        <div class="brand-content">
+            <span class="badge">Plataforma BI</span>
+            <h1>📊 SalesVision BI</h1>
+            <p>Transforme dados brutos em decisões estratégicas. Suba seus relatórios e visualize insights sobre suas vendas em tempo real.</p>
+        </div>
     </div>
 
     <div class="login-right">
+        <div class="form-box">
+            <h2>Entrar</h2>
+            <p class="subtitle">Insira suas credenciais para acessar o dashboard</p>
+            
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="alert" style="color: #ef4444; background: #fee2e2; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9rem;">
+                  {{ messages[0] }}
+                </div>
+              {% endif %}
+            {% endwith %}
 
-        <h2>Entrar</h2>
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="exemplo@empresa.com" required>
+                </div>
 
-        <form action="/dashboard">
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
 
-            <input
-                type="email"
-                placeholder="Seu email"
-                required>
-
-            <input
-                type="password"
-                placeholder="Sua senha"
-                required>
-
-            <button type="submit">
-                Acessar Plataforma
-            </button>
-
-        </form>
-
+                <button type="submit" class="btn-login">Acessar Plataforma</button>
+            </form>
+        </div>
     </div>
-
 </div>
 
 </body>

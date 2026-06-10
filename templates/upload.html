@@ -1,38 +1,83 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="pt-br">
 <head>
-
-<title>Upload CSV</title>
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/style.css') }}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SalesVision BI - Gerenciar Usuários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<div class="container">
+<div class="layout">
 
-<div class="logo">
+    <div class="sidebar">
+        <div class="logo">
+            📊 SalesVision BI
+        </div>
+        <div class="menu">
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/dashboard#upload">📁 Upload CSV</a>
+            <a href="/usuarios" class="active">👥 Usuários (CRUD)</a>
+            <a href="/logout" class="logout-link">🚪 Sair</a>
+        </div>
+    </div>
 
-<h1>📁 Upload CSV</h1>
+    <div class="main">
+        <div class="topbar">
+            <h1>Gerenciamento de Usuários</h1>
+            <p>Cadastre e remova perfis com acesso ao sistema (Requisito Obrigatório)</p>
+        </div>
 
-<p>Envie seus dados para análise</p>
+        <div class="crud-container" style="display: flex; gap: 30px; margin-top: 20px;">
+            
+            <div class="crud-card" style="flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <h3>➕ Novo Usuário</h3>
+                <form action="/usuarios/novo" method="POST" style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                        <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">Nome Completo</label>
+                        <input type="text" name="nome" placeholder="Nome do usuário" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                        <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">E-mail de Acesso</label>
+                        <input type="email" name="email" placeholder="exemplo@empresa.com" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                        <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">Senha de Acesso</label>
+                        <input type="password" name="senha" placeholder="••••••••" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    </div>
+                    <button type="submit" style="background: #3b82f6; color: white; padding: 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 8px;">Salvar Usuário</button>
+                </form>
+            </div>
 
-</div>
+            <div class="crud-card" style="flex: 1.5; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <h3>👥 Usuários Cadastrados</h3>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left;">
+                    <thead>
+                        <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
+                            <th style="padding: 12px; color: #64748b; font-size: 0.85rem;">ID</th>
+                            <th style="padding: 12px; color: #64748b; font-size: 0.85rem;">Nome</th>
+                            <th style="padding: 12px; color: #64748b; font-size: 0.85rem;">E-mail</th>
+                            <th style="padding: 12px; color: #64748b; font-size: 0.85rem;">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for usuario in lista_usuarios %}
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 12px;">{{ usuario.id }}</td>
+                            <td style="padding: 12px;">{{ usuario.nome }}</td>
+                            <td style="padding: 12px;">{{ usuario.email }}</td>
+                            <td style="padding: 12px;">
+                                <a href="/usuarios/deletar/{{ usuario.id }}" style="color: #ef4444; text-decoration: none; font-weight: 600; font-size: 0.9rem;">❌ Excluir</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-<form action="/resultado">
-
-<input type="file">
-
-<button>
-
-🚀 Processar Arquivo
-
-</button>
-
-</form>
+        </div>
+    </div>
 
 </div>
 
