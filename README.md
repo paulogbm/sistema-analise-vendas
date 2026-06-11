@@ -14,19 +14,21 @@ A solução foi projetada para simplificar a análise de dados comerciais, forne
 
 ## 🚀 Funcionalidades
 
-| Funcionalidade                                | Status                |
-| --------------------------------------------- | --------------------- |
-| Login de acesso ao sistema                    | ✅ Implementado        |
-| Dashboard interativo                          | ✅ Implementado        |
-| Upload de arquivos CSV                        | ✅ Implementado        |
-| Processamento automático dos dados            | ✅ Implementado        |
-| Cálculo da receita total                      | ✅ Implementado        |
-| Identificação do produto líder                | ✅ Implementado        |
-| Identificação do produto com menor desempenho | ✅ Implementado        |
-| Detecção de outliers                          | ✅ Implementado        |
-| Histórico de análises                         | 🚧 Em desenvolvimento |
-| Banco de dados SQLite                         | 🚧 Em desenvolvimento |
-| Relatórios avançados                          | 🚧 Em desenvolvimento |
+| Funcionalidade                                | Status      |
+| --------------------------------------------- | ----------- |
+| Login de acesso ao sistema                    | ✅ Concluído |
+| Dashboard interativo                          | ✅ Concluído |
+| Upload de arquivos CSV                        | ✅ Concluído |
+| Processamento automático dos dados            | ✅ Concluído |
+| Cálculo da receita total                      | ✅ Concluído |
+| Identificação do produto líder                | ✅ Concluído |
+| Identificação do produto com menor desempenho | ✅ Concluído |
+| Detecção de outliers                          | ✅ Concluído |
+| Interface responsiva                          | ✅ Concluído |
+| Integração com GitHub                         | ✅ Concluído |
+| Testes Unitários                              | ✅ Concluído |
+| Testes de API                                 | ✅ Concluído |
+| Testes E2E                                    | ✅ Concluído |
 
 ---
 
@@ -42,8 +44,8 @@ A solução foi projetada para simplificar a análise de dados comerciais, forne
 ### Administrador
 
 * Gerenciar informações do sistema;
-* Acompanhar histórico de análises;
-* Gerenciar usuários e configurações futuras.
+* Acompanhar análises realizadas;
+* Gerenciar futuras configurações da plataforma.
 
 ---
 
@@ -70,8 +72,8 @@ A solução foi projetada para simplificar a análise de dados comerciais, forne
          │
          ▼
 ┌─────────────────┐
-│ SQLite Database │
-│ (Em desenvolvimento)
+│     Arquivos    │
+│ CSV Analisados  │
 └─────────────────┘
 ```
 
@@ -90,10 +92,6 @@ A solução foi projetada para simplificar a análise de dados comerciais, forne
 * HTML5
 * CSS3
 
-### Banco de Dados
-
-* SQLite (em desenvolvimento)
-
 ### Ferramentas
 
 * Git
@@ -109,14 +107,22 @@ Sistema-Dados-de-Vendas
 │
 ├── models/
 ├── services/
+│   └── analise.py
 ├── static/
 │   └── css/
+│       └── style.css
 ├── templates/
+│   ├── login.html
+│   ├── dashboard.html
+│   └── resultado.html
 ├── tests/
+│   ├── test_analise.py
+│   ├── test_api.py
+│   └── test_upload.py
 ├── uploads/
 ├── app.py
-├── README.md
-└── requirements.txt
+├── requirements.txt
+└── README.md
 ```
 
 ---
@@ -134,11 +140,11 @@ Sistema-Dados-de-Vendas
 
 ## 📋 Requisitos Não Funcionais
 
-* Interface responsiva e intuitiva.
-* Processamento rápido dos arquivos enviados.
+* Interface amigável e intuitiva.
 * Compatibilidade com navegadores modernos.
+* Processamento rápido de arquivos CSV.
 * Código versionado utilizando GitHub.
-* Arquitetura preparada para expansão futura.
+* Estrutura modular para manutenção e evolução do sistema.
 
 ---
 
@@ -146,11 +152,33 @@ Sistema-Dados-de-Vendas
 
 O projeto contempla:
 
-* Testes Unitários
-* Testes de API
-* Testes End-to-End (E2E)
-* Casos de teste documentados
-* Evidências de execução
+### Testes Unitários
+
+* Validação da função de análise de vendas.
+* Verificação dos cálculos de receita total.
+* Identificação correta dos produtos líderes e de menor desempenho.
+
+### Testes de API
+
+* Teste do endpoint de upload.
+* Validação das respostas do servidor.
+
+### Testes E2E
+
+* Fluxo completo de login.
+* Upload de arquivo CSV.
+* Exibição dos resultados no dashboard.
+
+---
+
+## 📈 Exemplo de Métricas Geradas
+
+O sistema é capaz de apresentar:
+
+* Receita Total de Vendas
+* Produto Mais Vendido
+* Produto com Menor Desempenho
+* Quantidade de Outliers Detectados
 
 ---
 
@@ -174,6 +202,12 @@ Desenvolvido como projeto acadêmico para a disciplina de **Teste de Software**.
 
 ## 📌 Status do Projeto
 
-🚧 Em desenvolvimento
+✅ Projeto Concluído
 
-Versão atual: **1.0**
+Versão Final: **1.0**
+
+---
+
+## 🔗 Repositório
+
+Sistema de Análise de Dados de Vendas desenvolvido utilizando Python, Flask e Pandas, aplicando conceitos de Engenharia de Software, Desenvolvimento Web e Teste de Software.
