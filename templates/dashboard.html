@@ -6,20 +6,34 @@
     <title>SalesVision BI - Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
 <div class="layout">
 
     <div class="sidebar">
-        <div class="logo">
-            📊 SalesVision BI
+        <div class="logo" style="display: flex; align-items: center; gap: 10px;">
+            <i data-lucide="trending-up" style="width: 24px; height: 24px; color: #3b82f6;"></i>
+            SalesVision BI
         </div>
         <div class="menu">
-            <a href="/dashboard" class="active">🏠 Dashboard</a>
-            <a href="#upload">📁 Upload CSV</a>
-            <a href="/usuarios">👥 Usuários (CRUD)</a>
-            <a href="/logout" class="logout-link">🚪 Sair</a>
+            <a href="/dashboard" class="active" style="display: flex; align-items: center; gap: 10px;">
+                <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i> 
+                Dashboard
+            </a>
+            <a href="#upload" style="display: flex; align-items: center; gap: 10px;">
+                <i data-lucide="file-spreadsheet" style="width: 18px; height: 18px;"></i> 
+                Upload CSV
+            </a>
+            <a href="/usuarios" style="display: flex; align-items: center; gap: 10px;">
+                <i data-lucide="users" style="width: 18px; height: 18px;"></i> 
+                Usuários (CRUD)
+            </a>
+            <a href="/logout" class="logout-link" style="display: flex; align-items: center; gap: 10px;">
+                <i data-lucide="log-out" style="width: 18px; height: 18px;"></i> 
+                Sair
+            </a>
         </div>
     </div>
 
@@ -39,38 +53,126 @@
 
         <div class="cards">
             <div class="card">
-                <h3>💰 Receita Total</h3>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <i data-lucide="dollar-sign" style="width: 20px; height: 20px; color: #10b981;"></i>
+                    <h3 style="margin: 0;">Receita Total</h3>
+                </div>
                 <p>R$ {{ total_vendas }}</p>
             </div>
             <div class="card">
-                <h3>🏆 Produto Líder</h3>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <i data-lucide="award" style="width: 20px; height: 20px; color: #3b82f6;"></i>
+                    <h3 style="margin: 0;">Produto Líder</h3>
+                </div>
                 <p>{{ produto_lider }}</p>
             </div>
             <div class="card">
-                <h3>📉 Menor Desempenho</h3>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <i data-lucide="trending-down" style="width: 20px; height: 20px; color: #f43f5e;"></i>
+                    <h3 style="margin: 0;">Menor Desempenho</h3>
+                </div>
                 <p>{{ produto_menor }}</p>
             </div>
             <div class="card">
-                <h3>⚠️ Outliers</h3>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <i data-lucide="alert-triangle" style="width: 20px; height: 20px; color: #f59e0b;"></i>
+                    <h3 style="margin: 0;">Outliers</h3>
+                </div>
                 <p>{{ outliers }}</p>
             </div>
         </div>
 
         <div class="upload-area" id="upload">
-            <h2>📁 Enviar Arquivo CSV</h2>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <input type="file" name="arquivo" accept=".csv" required>
-                <button type="submit">🚀 Processar Dados</button>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <i data-lucide="folder-open" style="width: 24px; height: 24px; color: #eab308;"></i>
+                <h2 style="margin: 0;">Enviar Arquivo CSV</h2>
+            </div>
+            <form action="/upload" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 15px;">
+                
+                <div style="position: relative;">
+                    <input type="file" name="arquivo" id="arquivo_csv" accept=".csv" required 
+                           style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;"
+                           onchange="atualizarNomeArquivo()">
+                    
+                    <label for="arquivo_csv" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #1e293b; color: #94a3b8; border: 2px dashed #334155; padding: 16px; border-radius: 6px; cursor: pointer; font-weight: 500; width: 100%; box-sizing: border-box; transition: all 0.2s;" 
+                           onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#ffffff'" 
+                           onmouseout="this.style.borderColor='#334155'; this.style.color='#94a3b8'"
+                           id="label_arquivo">
+                        <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
+                        <span>Clique aqui para selecionar o arquivo CSV</span>
+                    </label>
+                </div>
+                
+                <button type="submit" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #3b82f6; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; width: fit-content; transition: background 0.2s;"
+                        onmouseover="this.style.background='#2563eb'" 
+                        onmouseout="this.style.background='#3b82f6'">
+                    <i data-lucide="rocket" style="width: 18px; height: 18px;"></i>
+                    Processar Dados
+                </button>
             </form>
         </div>
 
-        <div class="chart">
-            <h2>📈 Relatórios e Gráficos</h2>
-            <p>Em desenvolvimento...</p>
+        <div class="chart" style="display: flex; flex-direction: row; justify-content: center; align-items: center; width: 100%; box-sizing: border-box; padding: 40px 20px; min-height: 250px;">
+            
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 150px; width: 100%; max-width: 950px;">
+                
+                <div style="text-align: left; flex-shrink: 0; display: flex; align-items: flex-start; gap: 12px;">
+                    <i data-lucide="bar-chart-3" style="width: 24px; height: 24px; color: #3b82f6; margin-top: 4px;"></i>
+                    <h2 style="margin: 0; font-size: 1.4rem; color: #ffffff; line-height: 1.4; white-space: nowrap;">Relatórios de<br>Dados Processados</h2>
+                </div>
+                
+                <div style="width: 100%; max-width: 450px; flex-grow: 1;">
+                    {% if produtos %}
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid #334155;">
+                                    <th style="padding: 0 8px 12px 8px; color: #94a3b8; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Produto</th>
+                                    <th style="padding: 0 8px 12px 8px; color: #94a3b8; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; text-align: right;">Valor do Item</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in range(produtos|length) %}
+                                <tr style="border-bottom: 1px solid #1e293b;">
+                                    <td style="padding: 12px 8px; font-size: 0.95rem; color: #ffffff; font-weight: 500;">{{ produtos[i] }}</td>
+                                    <td style="padding: 12px 8px; font-size: 0.95rem; color: #cbd5e1; font-weight: 600; text-align: right;">R$ {{ valores[i] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div style="padding: 10px 8px; text-align: left; display: flex; gap: 10px; align-items: flex-start;">
+                            <i data-lucide="search" style="width: 20px; height: 20px; color: #64748b; margin-top: 2px;"></i>
+                            <p style="color: #94a3b8; font-size: 0.95rem; margin: 0; line-height: 1.5;">
+                                Nenhum arquivo processado no momento.<br>
+                                <span style="font-size: 0.85rem; color: #64748b;">Faça o upload de um arquivo CSV acima para visualizar os dados detalhados.</span>
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
         </div>
     </div>
 
 </div>
+
+<script>
+function atualizarNomeArquivo() {
+    const input = document.getElementById('arquivo_csv');
+    const label = document.getElementById('label_arquivo');
+    if (input.files.length > 0) {
+        label.innerHTML = `<i data-lucide="check-circle" style="width: 18px; height: 18px; color: #10b981;"></i><span style="margin-left: 8px;">Arquivo selecionado: <strong style="color: #3b82f6;">${input.files[0].name}</strong></span>`;
+        label.style.borderColor = '#3b82f6';
+        label.style.background = '#0f172a';
+        // Força a renderização do novo ícone inserido dinamicamente via JS
+        lucide.createIcons();
+    }
+}
+
+// Inicializa todos os ícones ao carregar a página
+lucide.createIcons();
+</script>
 
 </body>
 </html>
